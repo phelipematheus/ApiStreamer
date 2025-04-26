@@ -1,0 +1,12 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost,1433;Database=DB_Streamer;User Id=sa;Password=Teste@1234;TrustServerCertificate=True"
+  },
+  "AllowedHosts": "*"
+}
