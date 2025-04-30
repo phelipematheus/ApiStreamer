@@ -10,7 +10,7 @@ public sealed class InsertUsuarioCommandHandler(IUsuarioService usuarioService, 
     private readonly IUsuarioService _usuarioService = usuarioService;
     protected override async Task<UsuarioViewModel> ExecuteAsync(InsertUsuarioCommand request, CancellationToken cancellationToken)
     {
-        var usuario = await _usuarioService.AdicionarUsuario(request.Nome, request.Email);
+        var usuario = await _usuarioService.AdicionarUsuario(request.Nome, request.Email, request.Senha);
         return new UsuarioViewModel{
             Id = usuario.Id,
             Nome = usuario.Nome,

@@ -7,6 +7,8 @@ using CrossCutting.Exceptions;
 using Application.Usuarios.ViewModels;
 using Application.Usuarios.Commands;
 using Application.Usuarios.Queries;
+using Application.Login.Commands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Endpoints.Usuarios;
 
@@ -14,6 +16,7 @@ namespace Web.Endpoints.Usuarios;
 [ApiController]
 public class UsuarioController(IMediator mediator) : ApiControllerBase
 {
+    [Authorize]
     [HttpPost("usuarios")]
     [SwaggerOperation(
       Summary = "Cria um novo registro de usuário para uma playlist",
@@ -36,6 +39,7 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
         return Created("", result);
     }
 
+    [Authorize]
     [HttpPut("usuarios/{id}")]
     [SwaggerOperation(
     Summary = "Atualiza as informações do usuário da Playlist.",
@@ -53,6 +57,7 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
         return Ok(result);
     }
 
+    [Authorize]
     [HttpDelete("usuarios/{id}")]
     [SwaggerOperation(
         Summary = "Remove um registro de usuário.",
@@ -71,6 +76,7 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpGet("usuarios/{id}")]
     [SwaggerOperation(
         Summary = "Obtém um registro de usuário.",
@@ -87,6 +93,8 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
         var result = await mediator.Send(new GetUsuarioByIdQuery(id), cancellationToken);
         return Ok(result);
     }
+
+    [Authorize]
     [HttpGet("usuarios")]
     [SwaggerOperation(
         Summary = "Obtém todos os registros de usuários.",
@@ -104,5 +112,18 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
         return Ok(result);
     }
 
-
+    [HttpPost("login")]
+    [AllowAnonymous]
+    [SwaggerOperation(
+    Summary = "Autentica um usuário",
+    Description = "Retorna um token JWT se as credenciais forem válidas",
+    OperationId = "post/login",
+    Tags = ["Login"])]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> Login([FromBody] LoginUsuarioCommand command, CancellationToken cancellationToken)
+    {
+        var token = await mediator.Send(command, cancellationToken);
+        return Ok(new { Token = token });
+    }
 }

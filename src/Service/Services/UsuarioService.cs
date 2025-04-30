@@ -10,9 +10,9 @@ public class UsuarioService(IUsuarioRepository usuarioRepository) : IUsuarioServ
 {
     private readonly IUsuarioRepository _usuarioRepository = usuarioRepository;
 
-    public async Task<IUsuario> AdicionarUsuario(string nome, string email)
+    public async Task<IUsuario> AdicionarUsuario(string nome, string email, string senha)
     {
-        var usuario = new Domain.Entities.Usuario(nome, email);
+        var usuario = new Domain.Entities.Usuario(nome, email, senha);
 
         _usuarioRepository.AddUsuario(usuario);
         await _usuarioRepository.SaveChanges();
@@ -20,11 +20,11 @@ public class UsuarioService(IUsuarioRepository usuarioRepository) : IUsuarioServ
         return usuario;
     }
 
-    public async Task<IUsuario> AtualizarUsuario(int id, string nome, string email)
+    public async Task<IUsuario> AtualizarUsuario(int id, string nome, string email, string senha)
     {
         var usuario = _usuarioRepository.GetUsuarioById(id) ?? throw new NotFoundException("Usuário não encontrado.");
 
-        usuario.AtualizarDados(nome, email);
+        usuario.AtualizarDados(nome, email, senha);
 
         _usuarioRepository.UpdateUsuario(usuario);
         await _usuarioRepository.SaveChanges();

@@ -4,6 +4,7 @@ using Application.Conteudos.ViewModels;
 using CrossCutting;
 using CrossCutting.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Web.Endpoints.Base;
@@ -14,6 +15,7 @@ namespace Web.Endpoints.Usuarios
     [ApiController]
     public class ConteudoController(IMediator mediator) : ApiControllerBase
     {
+        [Authorize]
         [HttpPost("conteudos")]
         [SwaggerOperation(
           Summary = "Cria um novo registro de conteúdo",
@@ -36,6 +38,7 @@ namespace Web.Endpoints.Usuarios
             return Created("", result);
         }
 
+        [Authorize]
         [HttpPut("conteudos/{id}")]
         [SwaggerOperation(
         Summary = "Atualiza as informações do conteúdo.",
@@ -53,6 +56,7 @@ namespace Web.Endpoints.Usuarios
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("conteudos/{id}")]
         [SwaggerOperation(
             Summary = "Remove um registro de conteúdo.",
@@ -70,6 +74,7 @@ namespace Web.Endpoints.Usuarios
             return NoContent();
         }
 
+        [Authorize]
         [HttpGet("conteudos/{id}")]
         [SwaggerOperation(
             Summary = "Obtém um registro de conteúdo.",
@@ -87,6 +92,7 @@ namespace Web.Endpoints.Usuarios
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("conteudos")]
         [SwaggerOperation(
             Summary = "Obtém todos os registros de conteúdos.",

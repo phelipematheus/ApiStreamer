@@ -15,5 +15,8 @@ internal class UsuarioConfig : IEntityTypeConfiguration<Usuario>
            .IsRequired()
            .HasMaxLength(100);
         builder.HasIndex(x => x.Email).IsUnique();
+        builder.Property(x => x.Senha)
+           .IsRequired()
+           .HasMaxLength(100);
     }
 }
