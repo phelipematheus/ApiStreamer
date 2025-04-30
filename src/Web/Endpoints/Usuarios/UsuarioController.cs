@@ -16,7 +16,6 @@ namespace Web.Endpoints.Usuarios;
 [ApiController]
 public class UsuarioController(IMediator mediator) : ApiControllerBase
 {
-    [Authorize]
     [HttpPost("usuarios")]
     [SwaggerOperation(
       Summary = "Cria um novo registro de usuário para uma playlist",
@@ -39,7 +38,6 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
         return Created("", result);
     }
 
-    [Authorize]
     [HttpPut("usuarios/{id}")]
     [SwaggerOperation(
     Summary = "Atualiza as informações do usuário da Playlist.",
