@@ -4,6 +4,7 @@ using Application.Playlists.ViewModels;
 using CrossCutting;
 using CrossCutting.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Web.Endpoints.Base;
@@ -14,6 +15,7 @@ namespace Web.Endpoints.Usuarios
     [ApiController]
     public class PlaylistController(IMediator mediator) : ApiControllerBase
     {
+        [Authorize]
         [HttpPost("playlists")]
         [SwaggerOperation(
           Summary = "Cria uma nova playlist.",
@@ -36,6 +38,7 @@ namespace Web.Endpoints.Usuarios
             return Created("", result);
         }
 
+        [Authorize]
         [HttpPut("playlists/{id}")]
         [SwaggerOperation(
         Summary = "Atualiza as informações de uma playlist.",
@@ -53,6 +56,7 @@ namespace Web.Endpoints.Usuarios
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("playlists/{id}")]
         [SwaggerOperation(
             Summary = "Remove uma playlist.",
@@ -70,6 +74,7 @@ namespace Web.Endpoints.Usuarios
             return NoContent();
         }
 
+        [Authorize]
         [HttpGet("playlists/{id}")]
         [SwaggerOperation(
             Summary = "Obtém uma playlist.",
@@ -87,6 +92,7 @@ namespace Web.Endpoints.Usuarios
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("playlists")]
         [SwaggerOperation(
             Summary = "Obtém todas as playlists.",

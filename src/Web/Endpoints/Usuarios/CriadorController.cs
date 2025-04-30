@@ -4,6 +4,7 @@ using Application.Criadores.ViewModels;
 using CrossCutting;
 using CrossCutting.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using Web.Endpoints.Base;
@@ -14,6 +15,7 @@ namespace Web.Endpoints.Usuarios
     [ApiController]
     public class CriadorController(IMediator mediator) : ApiControllerBase
     {
+        [Authorize]
         [HttpPost("criadores")]
         [SwaggerOperation(
           Summary = "Cria um novo registro de criador",
@@ -36,6 +38,7 @@ namespace Web.Endpoints.Usuarios
             return Created("", result);
         }
 
+        [Authorize]
         [HttpPut("criadores/{id}")]
         [SwaggerOperation(
         Summary = "Atualiza as informações do criador.",
@@ -53,6 +56,7 @@ namespace Web.Endpoints.Usuarios
             return Ok(result);
         }
 
+        [Authorize]
         [HttpDelete("criadores/{id}")]
         [SwaggerOperation(
             Summary = "Remove um registro de criador.",
@@ -70,6 +74,7 @@ namespace Web.Endpoints.Usuarios
             return NoContent();
         }
 
+        [Authorize]
         [HttpGet("criadores/{id}")]
         [SwaggerOperation(
             Summary = "Obtém um registro de criador.",
@@ -87,6 +92,7 @@ namespace Web.Endpoints.Usuarios
             return Ok(result);
         }
 
+        [Authorize]
         [HttpGet("criadores")]
         [SwaggerOperation(
             Summary = "Obtém todos os registros de criadores.",

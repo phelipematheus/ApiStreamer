@@ -11,7 +11,7 @@ public sealed class UpdateUsuarioCommandHandler(IUsuarioService usuarioService, 
     private readonly IUsuarioService _usuarioService = usuarioService;
     protected override async Task<UsuarioViewModel> ExecuteAsync(UpdateUsuarioCommand request, CancellationToken cancellationToken)
     {
-        var usuario = await _usuarioService.AtualizarUsuario(request.Id, request.Nome, request.Email);
+        var usuario = await _usuarioService.AtualizarUsuario(request.Id, request.Nome, request.Email, request.Senha);
         return new UsuarioViewModel
         {
             Id = usuario.Id,

@@ -10,6 +10,7 @@ public interface IUsuario : IEntity
 {
     string Nome { get; }
     string Email { get; }
+    string Senha { get; }
     IList<Playlist> Playlists { get; }
-    void AtualizarDados(string nome, string email);
+    void AtualizarDados(string nome, string email, string senha);
 }
