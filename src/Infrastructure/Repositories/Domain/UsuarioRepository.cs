@@ -20,6 +20,12 @@ namespace Infrastructure.Repositories.Domain
                 .FirstOrDefault(u => u.Id == id)!;
         }
 
+        public IUsuario GetUsuarioByEmail(string email)
+        {
+            return _dbContext.Usuarios
+                .FirstOrDefault(u => u.Email == email)!;
+        }
+
         public IList<IUsuario> GetAllUsuarios()
         {
             return _dbContext.Usuarios

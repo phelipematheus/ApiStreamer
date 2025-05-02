@@ -8,6 +8,7 @@ namespace Service.Interfaces
         Task<IUsuario> AtualizarUsuario(int id, string nome, string email, string senha);
         Task RemoverUsuario(int id);
         Task<IUsuario> ObterUsuarioPorId(int id);
+        Task<IUsuario> ObterUsuarioPorEmail(string email);
         Task<IEnumerable<IUsuario>> ObterTodosUsuarios();
     }
 }
