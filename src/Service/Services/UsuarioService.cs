@@ -47,6 +47,13 @@ public class UsuarioService(IUsuarioRepository usuarioRepository) : IUsuarioServ
         return Task.FromResult<IUsuario>(usuario);
     }
 
+    public Task<IUsuario> ObterUsuarioPorEmail(string email)
+    {
+        var usuario = _usuarioRepository.GetUsuarioByEmail(email) ?? throw new NotFoundException("Não foi encontrado nenhum usuário com o email informado.");
+
+        return Task.FromResult<IUsuario>(usuario);
+    }
+
     public Task<IEnumerable<IUsuario>> ObterTodosUsuarios()
     {
         var usuarios = _usuarioRepository.GetAllUsuarios();

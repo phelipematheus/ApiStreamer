@@ -92,6 +92,23 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
         return Ok(result);
     }
 
+    [HttpGet("usuarios/email")]
+    [SwaggerOperation(
+        Summary = "Obtém um registro de usuário por email.",
+        Description = "Esta operação é utilizada para obter um registro de usuário no sistema. Requer o email do usuário.",
+        OperationId = "get/usuario/email",
+        Tags = ["Usuarios"])]
+    [ProducesResponseType<UsuarioViewModel>(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status500InternalServerError)]
+    [Produces("application/json")]
+    public async Task<IActionResult> Get(string email, CancellationToken cancellationToken)
+    {
+        var result = await mediator.Send(new GetUsuarioByEmailQuery(email), cancellationToken);
+        return Ok(result);
+    }
+
     [Authorize]
     [HttpGet("usuarios")]
     [SwaggerOperation(
