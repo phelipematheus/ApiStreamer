@@ -9,6 +9,7 @@ namespace Service.Interfaces
         Task RemoverUsuario(int id);
         Task<IUsuario> ObterUsuarioPorId(int id);
         Task<IUsuario> ObterUsuarioPorEmail(string email);
+        Task RecuperarSenha(string email, string novaSenha);
         Task<IEnumerable<IUsuario>> ObterTodosUsuarios();
     }
 }

@@ -60,4 +60,16 @@ public class UsuarioService(IUsuarioRepository usuarioRepository) : IUsuarioServ
 
         return Task.FromResult<IEnumerable<IUsuario>>(usuarios);
     }
+
+    public async Task RecuperarSenha(string email, string novaSenha)
+    {
+        var usuario = _usuarioRepository.GetUsuarioByEmail(email)
+                      ?? throw new NotFoundException("Usuário não encontrado com o e-mail informado.");
+
+        usuario.AtualizarSenha(novaSenha);
+
+        _usuarioRepository.UpdateUsuario(usuario);
+        await _usuarioRepository.SaveChanges();
+    }
+
 }
