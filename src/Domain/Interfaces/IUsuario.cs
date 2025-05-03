@@ -13,4 +13,5 @@ public interface IUsuario : IEntity
     string Senha { get; }
     IList<Playlist> Playlists { get; }
     void AtualizarDados(string nome, string email, string senha);
+    void AtualizarSenha(string novaSenha);
 }

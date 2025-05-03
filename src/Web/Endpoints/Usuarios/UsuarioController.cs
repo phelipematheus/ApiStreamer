@@ -38,6 +38,7 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
         return Created("", result);
     }
 
+    [Authorize]
     [HttpPut("usuarios/{id}")]
     [SwaggerOperation(
     Summary = "Atualiza as informações do usuário da Playlist.",
@@ -140,5 +141,20 @@ public class UsuarioController(IMediator mediator) : ApiControllerBase
     {
         var token = await mediator.Send(command, cancellationToken);
         return Ok(new { Token = token });
+    }
+
+    [HttpPost("login/recuperar-senha")]
+    [AllowAnonymous]
+    [SwaggerOperation(
+    Summary = "Recupera senha de um usuário",
+    Description = "Busca o usuário pelo email, caso o mesmo exista a senha é alterada",
+    OperationId = "post/login/recuperar-senha",
+    Tags = ["Login"])]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> RecuperaSenha([FromBody] RecuperaSenhaUsuarioCommand command, CancellationToken cancellationToken)
+    {
+        var token = await mediator.Send(command, cancellationToken);
+        return Ok();
     }
 }

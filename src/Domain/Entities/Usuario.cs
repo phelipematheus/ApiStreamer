@@ -14,4 +14,8 @@ public class Usuario(string nome, string email, string senha) : Entity, IUsuario
         Email = email;
         Senha = senha;
     }
+    public void AtualizarSenha(string novaSenha)
+    {
+        Senha = novaSenha;
+    }
 }
