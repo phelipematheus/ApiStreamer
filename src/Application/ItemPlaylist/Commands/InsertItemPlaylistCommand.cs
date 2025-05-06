@@ -11,5 +11,5 @@ namespace Application.ItemPlaylist.Commands;
 public sealed record InsertItemPlaylistCommand(
     int PlaylistId,
     int ConteudoId
-) : ICommand<InsertItemPlayListViewModel>;
+) : ICommand<InsertItemPlaylistViewModel>;
 

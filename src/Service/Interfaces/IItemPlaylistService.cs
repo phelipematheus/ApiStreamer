@@ -9,5 +9,6 @@ namespace Service.Interfaces
         Task<IItemPlaylist> ObterItemPlaylistPorId(int playlistId, int conteudoId);
         Task<IEnumerable<IItemPlaylist>> ObterItemPlaylistsPorPlaylistId(int playlistId);
         Task<IEnumerable<IItemPlaylist>> ObterItemPlaylistsPorConteudoId(int conteudoId);
+        Task<IEnumerable<IItemPlaylist>> ObterItemPlaylistPorUsuarioId(int usuarioId);
     }
 }

@@ -8,6 +8,7 @@ namespace Domain.Interfaces.Repositories
         void DeleteItemPlaylist(int playlistId, int conteudoId);
         IList<IItemPlaylist> GetItemPlaylistsByPlaylistId(int playlistId);
         IList<IItemPlaylist> GetItemPlaylistsByConteudoId(int conteudoId);
+        IList<IItemPlaylist> GetItemPlaylistsByUsuarioId(int usuarioId);
         IItemPlaylist GetItemPlaylistById(int playlistId, int conteudoId);
 
     }

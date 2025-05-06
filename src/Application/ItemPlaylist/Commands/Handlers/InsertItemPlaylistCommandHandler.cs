@@ -1,24 +1,24 @@
 ﻿using Application.Common;
 using Microsoft.Extensions.Logging;
 using Service.Interfaces;
-using Application.ItemPlaylist.ViewModels;
 using Application.ItemPlaylist.Commands;
 using Application.Playlists.ViewModels;
 using Application.Usuarios.ViewModels;
 using Application.Conteudos.ViewModels;
 using Application.Criadores.ViewModels;
+using Application.ItemPlaylist.ViewModels;
 
 namespace Application.ItemitemPlaylist.Commands.Handlers;
 
 public sealed class InsertItemPlaylistCommandHandler(IItemPlaylistService itemPlaylistService, ILogger<InsertItemPlaylistCommandHandler> logger) :
-    BaseCommandHandler<InsertItemPlaylistCommand, InsertItemPlayListViewModel>(logger)
+    BaseCommandHandler<InsertItemPlaylistCommand, InsertItemPlaylistViewModel>(logger)
 {
     private readonly IItemPlaylistService _itemPlaylistService = itemPlaylistService;
-    protected override async Task<InsertItemPlayListViewModel> ExecuteAsync(InsertItemPlaylistCommand request, CancellationToken cancellationToken)
+    protected override async Task<InsertItemPlaylistViewModel> ExecuteAsync(InsertItemPlaylistCommand request, CancellationToken cancellationToken)
     {
         var itemPlaylist = await _itemPlaylistService.AdicionarItemPlaylist(request.PlaylistId, request.ConteudoId);
 
-        return new InsertItemPlayListViewModel
+        return new InsertItemPlaylistViewModel
         {
             Playlist = new PlaylistViewModel 
             { 
