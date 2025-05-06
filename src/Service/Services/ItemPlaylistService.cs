@@ -55,5 +55,12 @@ namespace Service.Services
             var itemPlaylists = _itemPlaylistRepository.GetItemPlaylistsByConteudoId(conteudo.Id);
             return Task.FromResult<IEnumerable<IItemPlaylist>>(itemPlaylists);
         }
+
+        public Task<IEnumerable<IItemPlaylist>> ObterItemPlaylistPorUsuarioId(int usuarioId)
+        {
+            var usuario = _usuarioRepository.GetUsuarioById(usuarioId) ?? throw new NotFoundException("Usuário não encontrado.");
+            var itemPlaylist = _itemPlaylistRepository.GetItemPlaylistsByUsuarioId(usuario.Id);
+            return Task.FromResult<IEnumerable<IItemPlaylist>>(itemPlaylist);
+        }
     }
 }

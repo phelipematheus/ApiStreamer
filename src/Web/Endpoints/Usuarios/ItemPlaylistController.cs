@@ -24,7 +24,7 @@ namespace Web.Endpoints.Usuarios
           Description = "Esta operação é utilizada para criar um novo item de playlist. Requer as informações obrigatórias no corpo da requisição.",
           OperationId = "post/item-playlists",
           Tags = ["ItemPlaylists"])]
-        [ProducesResponseType<InsertItemPlayListViewModel>(StatusCodes.Status201Created)]
+        [ProducesResponseType<InsertItemPlaylistViewModel>(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status500InternalServerError)]
@@ -93,5 +93,23 @@ namespace Web.Endpoints.Usuarios
             var result = await mediator.Send(new GetItemPlaylistByPlaylistIdQuery(id), cancellationToken);
             return Ok(result);
         }
+        [Authorize]
+        [HttpGet("item-playlists/usuarios/{id}/playlists-conteudos")]
+        [SwaggerOperation(
+            Summary = "Obtém todos os itens associados a uma playlist de um usuário.",
+            Description = "Esta operação é utilizada para obter todos os itens de playlist no sistema. Requer o ID do usuário na URL.",
+            OperationId = "get/item-playlists/usuarios/id",
+            Tags = ["ItemPlaylists"])]
+        [ProducesResponseType<IEnumerable<InsertItemPlaylistViewModel>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status500InternalServerError)]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetByUsuarioId([FromRoute] int id, CancellationToken cancellationToken)
+        {
+            var result = await mediator.Send(new GetItemPlaylistByUsuarioIdQuery(id), cancellationToken);
+            return Ok(result);
+        }
+
     }
 }
