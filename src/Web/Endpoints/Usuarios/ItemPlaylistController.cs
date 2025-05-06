@@ -41,7 +41,7 @@ namespace Web.Endpoints.Usuarios
         }
 
         [Authorize]
-        [HttpDelete("item-playlists/conteudos/{id}")]
+        [HttpDelete("item-playlists/playlists/{idPlaylist}/conteudos/{id}")]
         [SwaggerOperation(
             Summary = "Remove um item de playlist.",
             Description = "Esta operação é utilizada para remover um item de playlist no sistema. Requer o ID do item na URL.",
@@ -52,14 +52,14 @@ namespace Web.Endpoints.Usuarios
         [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status500InternalServerError)]
         [Produces("application/json")]
-        public async Task<IActionResult> Delete([FromRoute] int id, int idPlaylist, CancellationToken cancellationToken)
+        public async Task<IActionResult> Delete([FromRoute] int id, [FromRoute] int idPlaylist, CancellationToken cancellationToken)
         {
             await mediator.Send(new DeleteItemPlaylistCommand(idPlaylist, id), cancellationToken);
             return NoContent();
         }
 
         [Authorize]
-        [HttpGet("item-playlists/conteudos/{id}")]
+        [HttpGet("item-playlists/conteudos/{id}/playlists")]
         [SwaggerOperation(
             Summary = "Obtém todas as playlists que o conteúdo específico está presente.",
             Description = "Esta operação é utilizada para obter todos as playlists que o conteúdo está presente no sistema. Requer o ID do conteúdo na URL.",
@@ -77,7 +77,7 @@ namespace Web.Endpoints.Usuarios
         }
 
         [Authorize]
-        [HttpGet("item-playlists/playlists/{id}")]
+        [HttpGet("item-playlists/playlists/{id}/conteudos")]
         [SwaggerOperation(
             Summary = "Obtém todos os conteúdos associados a uma playlist.",
             Description = "Esta operação é utilizada para obter todos os itens de playlist no sistema. Requer o ID da playlist na URL.",
