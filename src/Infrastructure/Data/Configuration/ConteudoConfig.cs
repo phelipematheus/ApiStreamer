@@ -15,7 +15,7 @@ namespace Infrastructure.Data.Configuration
             builder.Property(x => x.Tipo).IsRequired().HasMaxLength(50);
             builder.Property(x => x.CriadorId).IsRequired();
             builder.HasOne(x => x.Criador)
-                .WithMany()
+                .WithMany(c => c.Conteudos)
                 .HasForeignKey(x => x.CriadorId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
