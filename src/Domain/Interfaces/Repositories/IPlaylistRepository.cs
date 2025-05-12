@@ -9,6 +9,7 @@ public interface IPlaylistRepository : IRepository
 {
     IPlaylist GetPlaylistById(int id);
     IList<IPlaylist> GetAllPlaylists();
+    IList<IPlaylist> GetPlaylistsByUsuarioId(int usuarioId);
     void AddPlaylist(IPlaylist playlist);
     void UpdatePlaylist(IPlaylist playlist);
     void DeletePlaylist(int id);

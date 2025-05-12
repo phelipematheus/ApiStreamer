@@ -43,6 +43,12 @@ namespace Service.Playlist
             return Task.FromResult<IPlaylist>(playlist);
         }
 
+        public Task<IEnumerable<IPlaylist>> ObterPlaylistPorUsuarioId(int usuarioId)
+        {
+            var playlist = _playlistRepository.GetPlaylistsByUsuarioId(usuarioId) ?? throw new NotFoundException("Playlist não encontrada.");
+            return Task.FromResult <IEnumerable<IPlaylist>>(playlist);
+        }
+
         public Task<IEnumerable<IPlaylist>> ObterTodasPlaylists()
         {
             var playlists = _playlistRepository.GetAllPlaylists();

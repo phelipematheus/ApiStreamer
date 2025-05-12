@@ -21,6 +21,15 @@ public class PlaylistRepository(StreamerDbContext dbContext) : RepositoryBase(db
             .Cast<IPlaylist>()
             .ToList();
     }
+
+    public IList<IPlaylist> GetPlaylistsByUsuarioId(int usuarioId)
+    {
+        return _dbContext.Playlists
+            .Include(p => p.Usuario)
+            .Where(p => p.UsuarioId == usuarioId)
+            .Cast<IPlaylist>()
+            .ToList();
+    }
     public void AddPlaylist(IPlaylist playlist)
     {
         _dbContext.Playlists.Add((Playlist)playlist);

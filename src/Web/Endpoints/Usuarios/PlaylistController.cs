@@ -109,5 +109,23 @@ namespace Web.Endpoints.Usuarios
             var result = await mediator.Send(new GetAllPlaylistsQuery(), cancellationToken);
             return Ok(result);
         }
+
+        [Authorize]
+        [HttpGet("playlists/usuarios/{id}")]
+        [SwaggerOperation(
+            Summary = "Obtém todas as playlists de um usuário.",
+            Description = "Esta operação é utilizada para obter todas as playlists de um usuário no sistema. Requer o ID do usuário na URL.",
+            OperationId = "get/usuario/playlists",
+            Tags = ["Playlists"])]
+        [ProducesResponseType<IEnumerable<PlaylistViewModel>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status422UnprocessableEntity)]
+        [ProducesResponseType(typeof(ErrorDetail), StatusCodes.Status500InternalServerError)]
+        [Produces("application/json")]
+        public async Task<IActionResult> GetByUsuarioId([FromRoute] int id, CancellationToken cancellationToken)
+        {
+            var result = await mediator.Send(new GetPlaylistByUsuarioIdQuery(id), cancellationToken);
+            return Ok(result);
+        }
     }
 }
