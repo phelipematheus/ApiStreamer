@@ -15,12 +15,12 @@ namespace Infrastructure.Data.Configuration
             builder.HasOne(x => x.Playlist)
                    .WithMany()
                    .HasForeignKey(x => x.PlaylistId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(x => x.Conteudo)
                    .WithMany()
                    .HasForeignKey(x => x.ConteudoId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
         }
 
     }
